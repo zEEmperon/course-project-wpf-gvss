@@ -1,0 +1,835 @@
+			FILE BinarySerialization.cs
+____________________________________________________________
+
+class BinarySerialization 
+
+# Methods: 
++ WriteToBinaryFile<T> (string, T, bool) : void
++ ReadFromBinaryFile<T> (string) : T
+____________________________________________________________
+
+			FILE Computations.cs
+____________________________________________________________
+
+class Computations 
+
+# Methods: 
++ getCapLetAndIndex (char, int) : string
++ getUniqueCode (char, uint, SensorArrowSign) : string
+____________________________________________________________
+
+			FILE EditDialog.xaml.cs
+____________________________________________________________
+
+class EditDialog : Window 
+
+# Fields: 
++ ControlMethod : SensorControlMethod
++ ControlAgent : SensorControlAgent
++ RequestBody : SensorRequestBodies
++ RequestPlacementMethod : SensorRequestPlacementMethod
++ Description : string
++ readonly UniqueCode : string
+- ControlMethodDef : SensorControlMethod
+- ControlAgentDef : SensorControlAgent
+- RequestBodyDef : SensorRequestBodies
+- RequestPlacementMethodDef : SensorRequestPlacementMethod
+- DescriptionDef : string
+
+# Methods: 
++ EditDialog (Sensor)
+- Button_Click (object, RoutedEventArgs) : void
+- controlMethodCB_SelectionChanged (object, SelectionChangedEventArgs) : void
+- requestBodyCB_SelectionChanged (object, SelectionChangedEventArgs) : void
+- cb_SelectionChanged (object, SelectionChangedEventArgs) : void
+- setButton () : void
+- LocalizeWindow () : void
+____________________________________________________________
+
+			FILE Enumerations.cs
+____________________________________________________________
+
+enum LanguageMode 
+
+# Values: 
+Russian
+Ukrainian
+____________________________________________________________
+
+enum Labels 
+
+# Values: 
+LanguageMode
+RegisterAuxiliaryParam
+Letter
+Index
+ControlMethod
+ControlAgentAuto
+ControlAgentRequest
+RequestBody
+RequestPlacementMethod
+Description
+Managment
+AuxiliaryParamAndViolation
+GVSSSettings
+NumOfTechLines
+OperatorLevel
+InformationRepresentationMethod
+Event
+ChooseEvent
+InformationQuantity
+OriginalTime
+RequestTime
+IrrelevantInformationTime
+AgentTimeInfluence
+FindControlAgentTime
+TotalTime
+AddViolation
+Violation
+ChooseAction
+FailureRate
+AuxiliaryParam
+AddAuxiliaryParamToVertex
+____________________________________________________________
+
+enum Buttons 
+
+# Values: 
+Register
+Edit
+Delete
+GetTime
+Add
+Change
+____________________________________________________________
+
+enum ToolTips 
+
+# Values: 
+ViolationsAreUnique
+ViolationsCanBeParams
+CreateNewGVSS
+LoadGVSS
+SaveGVSS
+SavePhoto
+____________________________________________________________
+
+enum ErrorMessages 
+
+# Values: 
+WhileAddRepetative
+WhileGVSSFileCorrupted
+WhileASVFileCorrupted
+TheNameExistsAlready
+NotAllFieldsAreFilled
+____________________________________________________________
+
+enum MessageBoxMessages 
+
+# Values: 
+DoYouWantToSaveGVSSBeforeQuit
+DeleteVertex
+SaveGVSSBeforeLoad
+ChangeMode
+FullDeleteParam
+____________________________________________________________
+
+enum ContextMenuHeaders 
+
+# Values: 
+DeleteVertex
+Edit
+____________________________________________________________
+
+enum WindowTitles 
+
+# Values: 
+ErrorMB
+WarningMB
+Edit
+Add
+EventDetectionTime
+MathLABResults
+____________________________________________________________
+
+enum Words 
+
+# Values: 
+All
+EventID
+AddViolation
+AddAuxiliaryParamToVertex
+EventTime
+____________________________________________________________
+
+enum OperatorLevel 
+
+# Values: 
+Second
+Third
+Forth
+Fifth
+____________________________________________________________
+
+enum SensorControlMethod 
+
+# Values: 
+Auto
+Request
+None
+____________________________________________________________
+
+enum SensorControlAgent 
+
+# Values: 
+WeakDampedDevice
+HighlyDampedDevice
+DigitalThreeDigitIndicator
+SignalingDevice
+None
+____________________________________________________________
+
+enum SensorArrowSign 
+
+# Values: 
+None
+Left
+Up
+Right
+Down
+____________________________________________________________
+
+enum SensorRequestPlacementMethod 
+
+# Values: 
+UnorganizedMethod
+MnemonicDiagram
+Combination
+BlockDiagramMethod
+Separately
+GroupMethod
+None
+____________________________________________________________
+
+enum SensorRequestBodies 
+
+# Values: 
+ToggleSwitch
+Button
+Dialer
+KeyboardDevice
+None
+____________________________________________________________
+
+enum InformationRepresentationMethod 
+
+# Values: 
+MnemonicDiagram
+GroupMethod
+BlockDiagramMethod
+None
+____________________________________________________________
+
+			FILE Event.cs
+____________________________________________________________
+
+class Event 
+
+# Fields: 
+- vertices : List<VertexAndNumOfSubverticies>
+- numOfTechLines : uint
+- violationInformationQuantity : float
+- sensorsCount : uint
+- dampedDeviceTotal : uint
+- operatorLevel : OperatorLevel
+- informationRepresentationMethod : InformationRepresentationMethod
++ VertexPath : List<uint>
++ requestSensors : List<Sensor>
++ autoSensors : List<Sensor>
++ ID : uint
+
+# Methods: 
++ Event (uint, List<uint>, uint, uint, float, OperatorLevel, uint, InformationRepresentationMethod)
+- isVertexAlreadyAdded (int) : VertexAndNumOfSubverticies
+- Log (double) : double
+- Round (double, int) : double
++ addRequestSensor (Sensor) : void
++ addAutoSensor (Sensor) : void
++ addVertexAndSubverticiesNumber (VertexAndNumOfSubverticies) : void
++ getVertexAndSubverticiesNumber (int) : VertexAndNumOfSubverticies
++ getInformationDifficulty () : double
++ getOriginalTime () : double
++ getRequestTime () : double
++ getIrrelevantTime () : double
++ getAgentTimeInfluence () : double
++ getFindControlAgentTime () : double
+
+# Nested types: 
++ class VertexAndNumOfSubverticies
+
+____________________________________________________________
+
+class VertexAndNumOfSubverticies 
+
+# Fields: 
++ VertexID : int
++ SubverticiesNumber : int
+
+# Methods: 
++ VertexAndNumOfSubverticies ()
++ VertexAndNumOfSubverticies (int, int)
++ isNull () : bool
+____________________________________________________________
+
+			FILE Exceptions.cs
+____________________________________________________________
+
+class InvalidArgument : Exception 
+
+# Methods: 
++ InvalidArgument ()
+____________________________________________________________
+
+class InvalidSensor : Exception 
+
+# Methods: 
++ InvalidSensor ()
+____________________________________________________________
+
+class UnexpectedError : Exception 
+
+# Methods: 
++ UnexpectedError ()
+____________________________________________________________
+
+class NotFoundException: Exception 
+
+# Methods: 
++ NotFoundException ()
+____________________________________________________________
+
+class SensorRepeatsException: Exception 
+
+# Methods: 
++ SensorRepeatsException ()
+____________________________________________________________
+
+			FILE GVSS.cs
+____________________________________________________________
+
+enum GVSSMode 
+
+# Values: 
+UniqueViolations
+RepetativeViolations
+____________________________________________________________
+
+class VertexNode 
+
+# Fields: 
++ VertexID : uint
++ UniqueCode : string
+
+# Methods: 
++ VertexNode (uint, string)
+____________________________________________________________
+
+class GVSS 
+
+# Fields: 
+- vertexes : List<Vertex>
+- violations : List<(Sensor, uint)>
+- auxiliaryParams : List<Sensor>
+- deletedVertexesList : List<uint>
+- correspondences : List<Correspondence>
+- vertexID_counter : uint
+- readonly mainVertexID : uint
+- mode : GVSSMode
++ ProductionAreaName : string
++ Size : int
+
+# Methods: 
++ GVSS (Point, GVSSMode)
+- getVertex (uint) : Vertex
+- getSensorsCount () : uint
+- isViolation (uint) : bool
+- addVertex (VertexType, uint, Point) : uint
+- deleteVertex (uint) : void
+- addEdge (uint, uint, float) : void
+- isVertexInGraph (uint) : bool
+- doesTheEdgeExist (uint, uint) : bool
+- registerSensor (char, uint, string, SensorControlMethod, SensorControlAgent, SensorArrowSign, SensorRequestBodies, SensorRequestPlacementMethod) : Sensor
+- getAuxiliaryParam (string) : Sensor
+- getCorrespondence (uint) : Correspondence
+- doesTheAuxiliaryParamExist (string) : bool
+- doesTheSensorRepeat (string, uint) : bool
+- deleteCorrespondence (uint) : void
+- doesTheViolationExist (string) : bool
+- deleteViolation (uint) : void
+- getLevel (uint) : uint
+- deleteAuxiliary (string) : void
+- deleteProc (uint) : void
+- getWayUp (uint) : List<uint>
+- getNumberVerticiesInSubtree (uint) : int
+- getViolationInformationQuantity (uint, uint) : float
+- getDampedDeviceTotal () : uint
++ addViolation (char, uint, string, SensorControlMethod, SensorControlAgent, SensorArrowSign, SensorRequestBodies, SensorRequestPlacementMethod, Point, float) : VertexNode
++ addViolation (string, Point, float) : VertexNode
++ addAuxiliaryParam (char, uint, string, SensorControlMethod, SensorControlAgent, SensorArrowSign, SensorRequestBodies, SensorRequestPlacementMethod) : string
++ connect (uint, string, Point) : VertexNode
++ delete (uint) : List<uint>
++ isSensorNameAvailable (uint, char, SensorArrowSign) : bool
++ getUniqueCode (uint) : string
++ getVertexes (bool) : List<VertexNode>
++ getVertexesIDs () : List<uint>
++ getAdjacentVertexes (uint) : List<uint>
++ getAvailableParams () : List<string>
++ getEvents (uint, OperatorLevel, InformationRepresentationMethod) : List<Event>
++ getMain () : VertexNode
++ getVertexCenterPos (uint) : Point
++ setVertexCenterPos (uint, Point) : void
++ getAllSensors () : List<string>
++ setMode (GVSSMode) : List<uint>
++ getAllViolations () : List<string>
++ isSensorInGVSS (string) : bool
++ getSensor (string) : Sensor
++ deleteAll (string) : List<uint>
++ getVertexChilds (uint) : List<uint>
++ editSensor (string, SensorControlAgent, SensorControlMethod, SensorRequestBodies, SensorRequestPlacementMethod, string) : void
++ getType (uint) : string
++ getEdgeWeight (uint, uint) : float
++ getMode () : GVSSMode
++ isNull () : bool
+
+# Nested types: 
+- enum VertexType
+- class Vertex
+- struct Correspondence
+
+____________________________________________________________
+
+enum VertexType 
+
+# Values: 
+Main
+Violation
+AuxiliaryParam
+____________________________________________________________
+
+class Vertex 
+
+# Fields: 
++ CenterPos : Point
++ ID : uint
++ Type : VertexType
++ AdjVCount : int
++ Level : uint
+- edges : List<Edge>
+
+# Methods: 
++ Vertex (uint, VertexType, uint, Point)
++ Vertex ()
++ addEdge (uint, float) : void
++ deleteEdge (uint) : void
++ setEdgeWeight (uint, float) : void
++ getAdjacentVertexes () : List<uint>
++ isConnectedWith (uint) : bool
++ getEdgeWeight (uint) : float
++ getParentVertex () : uint
+
+# Nested types: 
+- class Edge
+
+____________________________________________________________
+
+class Edge 
+
+# Fields: 
++ EdgeWeight : float
++ ConnectedVertexID : uint
+
+# Methods: 
++ Edge (uint, float)
+____________________________________________________________
+
+struct Correspondence 
+
+# Fields: 
++ SensorCode : string
++ VertexID : uint
++ VertexIndex : uint
+
+# Methods: 
++ Correspondence (string, uint, uint)
+____________________________________________________________
+
+			FILE InputCorrector.cs
+____________________________________________________________
+
+class InputCorrector 
+
+# Methods: 
+- getError (Errors) : ErrorWhileInput
+- isArrowRBSelected (List<RadioButton>, ref SensorArrowSign) : bool
+- isMatch (string, string) : bool
+- isFloatValue (string) : bool
+- setRequestCBs (bool, ComboBox, Border, ComboBox, Border) : void
+- isFailureRateTextBoxINullOrValid (TextBox) : bool
+- isFailureRateTextBoxINullOrNotValid (TextBox) : bool
++ isFailureRateTextBoxValid (TextBox) : bool
++ InitializeRelatedToSensorCBs (ComboBox, ComboBox, ComboBox, ComboBox) : void
++ textBoxWithoutSpaceKey_PreviewKeyDown (object, KeyEventArgs) : void
++ IndexTB_PreviewTextInput (object, TextCompositionEventArgs) : void
++ CapitalLetterTB_PreviewTextInput (object, TextCompositionEventArgs) : void
++ FailureRateTB_PreviewTextInput (object, TextCompositionEventArgs) : void
++ changeSensorNameRepresentation (TextBox, TextBox, Label, List<RadioButton>, Border, DockPanel, ref SensorArrowSign) : void
++ arrowRB_Click (object, RoutedEventArgs, ref SensorArrowSign) : void
++ setButton (Button, TextBox, TextBox, TextBox, List<string>, List<RadioButton>, TextBlock, TextBox) : void
++ ControlMethodCB_SelectionChanged (object, SelectionChangedEventArgs, TextBlock, ComboBox, Border, ComboBox, Border) : void
++ requestBodyCB_SelectionChanged (object, SelectionChangedEventArgs, ComboBox) : void
++ setSensorInfoTextBlocks (Sensor, TextBlock, TextBlock, TextBlock, TextBlock, TextBlock, Border, Border, TextBlock) : void
++ InitializeTechLinesComboBox (ComboBox, int) : void
++ LocalizeComboBox (ComboBox, Type) : void
++ LocalizeComboBoxes (ComboBox, ComboBox, ComboBox, ComboBox, ComboBox) : void
+
+# Nested types: 
+- enum Errors
+- struct ErrorWhileInput
+
+____________________________________________________________
+
+enum Errors 
+
+# Values: 
+Name
+NotFilled
+AllEmpty
+None
+____________________________________________________________
+
+struct ErrorWhileInput 
+
+# Fields: 
++ Message : string
++ Brush : Brush
++ isBtnEnabled : bool
+____________________________________________________________
+
+			FILE MainWindow.xaml.cs
+____________________________________________________________
+
+struct Connection 
+
+# Fields: 
++ v1ID : uint
++ v2ID : uint
+
+# Methods: 
++ Connection (uint, uint)
+____________________________________________________________
+
+class MainWindow : Window 
+
+# Fields: 
+- g : GVSS
+- btnWidth : uint
+- btnHeight : uint
+- isPressed : bool
+- particularEventIsSelected : bool
+- topLeft : Point
+- pos : Point
+- indexCounter : int
+- contextMenu : ContextMenu
+- checkedArrowRB : SensorArrowSign
+- checkedModeRB : GVSSMode
+- currentLanguage : LanguageMode
+- uniqueCodeRadioButtons : List<RadioButton>
+- modeRadioButtons : List<RadioButton>
+- languageModeRadioButtons : List<RadioButton>
+- initializationFinished : bool
+- readonly mainInitialPos : Point
+
+# Methods: 
++ MainWindow ()
+- warningMB (string) : MessageBoxResult
+- errorMB (string) : void
+- programmaticallySetGVSSMode (GVSSMode) : void
+- clearInterface () : void
+- SaveGVSS () : bool
+- LoadGVSS () : void
+- SavePhoto () : void
+- addViolation (char, uint, string, SensorControlMethod, SensorControlAgent, SensorRequestBodies, SensorRequestPlacementMethod, SensorArrowSign, Point, float) : void
+- addViolation (string, Point, float) : void
+- spawnViolation (VertexNode, float) : void
+- rollUpOrExpandStackPanel (StackPanel, Border, Visibility) : void
+- load_sensorEditCB (string) : string
+- load_chooseEventCB (int) : void
+- connectAuxiliaryParamAndViolation (uint, string, Point) : void
+- getVertexTopLeft (uint) : Point
+- spawnVertex (string, VertexNode) : void
+- NewBtn_Click (object, RoutedEventArgs) : void
+- spawnVertexNum (uint, Point) : void
+- moveVertexNum (uint, Point) : void
+- setVertexNumIndex (uint, int) : void
+- NewBtn_MouseMove (object, MouseEventArgs) : void
+- NewBtn_MouseUp (object, MouseButtonEventArgs) : void
+- NewBtn_MouseDown (object, MouseButtonEventArgs) : void
+- spawnEdge (uint, uint, float) : void
+- redrawEdges (uint) : void
+- create_GVSS () : void
+- ContextMenuClick (object, RoutedEventArgs) : void
+- addVertexOnCanvas (object, MouseButtonEventArgs) : void
+- arrowRB_Click (object, RoutedEventArgs) : void
+- clearRegisterParamFields () : void
+- registerButton_Click (object, RoutedEventArgs) : void
+- removeVertexes (List<uint>) : void
+- deleteVertex (uint) : void
+- photoButton_Click (object, RoutedEventArgs) : void
+- modeRB_Click (object, RoutedEventArgs) : void
+- loadManageSensorFields (string) : void
+- fillManagePanel (string) : void
+- sensorsEditCB_SelectionChanged (object, SelectionChangedEventArgs) : void
+- deleteButton_Click (object, RoutedEventArgs) : void
+- edit (string) : void
+- editButton_Click (object, RoutedEventArgs) : void
+- drawParticularEvent (uint) : void
+- makeAllElementsOnCanvasVisible () : void
+- chooseEventCB_SelectionChanged (object, SelectionChangedEventArgs) : void
+- exitParticularEvent () : void
+- saveGVSS_Click (object, RoutedEventArgs) : void
+- loadGVSS_Click (object, RoutedEventArgs) : void
+- setEventsFieldsEnabled (bool) : void
+- indexTxtBox_PreviewTextInput (object, TextCompositionEventArgs) : void
+- capLetTxtBox_PreviewTextInput (object, TextCompositionEventArgs) : void
+- textBoxWithoutSpaceKey_PreviewKeyDown (object, KeyEventArgs) : void
+- auxiliaryParamRegisterDescription_TextChanged (object, TextChangedEventArgs) : void
+- setRegisterAuxiliaryParamButton () : void
+- nameParam_TextChanged (object, TextChangedEventArgs) : void
+- controlMethodCB_SelectionChanged (object, SelectionChangedEventArgs) : void
+- requestBodyCB_SelectionChanged (object, SelectionChangedEventArgs) : void
+- getTimeButton_Click (object, RoutedEventArgs) : void
+- settingsGVSSCB_SelectionChanged (object, SelectionChangedEventArgs) : void
+- newGVSSButton_Click (object, RoutedEventArgs) : void
+- endWithGVSS (string) : bool
+- Window_Closing (object, System.ComponentModel.CancelEventArgs) : void
+- FindYArray (string) : List<double>
+- lanModeRB_Click (object, RoutedEventArgs) : void
+- setUpInterface () : void
+- setUpButtons () : void
+- setUpLabels () : void
+- setUpToolTips () : void
+- setUpContextMenu () : void
+- setUpComboBoxes () : void
+____________________________________________________________
+
+			FILE MathLABResultWindow.xaml.cs
+____________________________________________________________
+
+class EventDifficulty 
+
+# Fields: 
++ EventID : int
++ EventTime : string
+- _eventTime : double
+
+# Methods: 
++ EventDifficulty (int, double)
+____________________________________________________________
+
+class MathLABResultWindow : Window 
+
+# Fields: 
+- const ukrWidth : int
+- const ruWidth : int
+
+# Methods: 
++ MathLABResultWindow (List<double>)
+- LocalizeWindow () : void
+____________________________________________________________
+
+			FILE ParameterValueHelper.cs
+____________________________________________________________
+
+class ParameterValueHelper 
+
+# Fields: 
++ readonly OperatorLevels : Dictionary<OperatorLevel, string>
+
+# Methods: 
+- createComboBoxItem (string, object) : ComboBoxItem
++ InitializeComboBox (ComboBox, Type) : void
++ InitializeComboBoxAndSelectIndex (ComboBox, Type, int) : void
++ InitializeComboBoxWithNone (ComboBox, Type) : void
++ InitializeComboBoxWithNoneAndSelectIndex (ComboBox, Type, int) : void
++ InitializeRequestPlacementMethod (ComboBox, SensorRequestBodies) : void
+____________________________________________________________
+
+			FILE RenderVisualService.cs
+____________________________________________________________
+
+class RenderVisualService 
+
+# Fields: 
+- const defaultDpi : double
+
+# Methods: 
++ RenderToPNGFile (Visual, string) : void
+- GetRenderTargetBitmapFromControl (Visual, double) : BitmapSource
+____________________________________________________________
+
+			FILE Sensor.cs
+____________________________________________________________
+
+class Sensor 
+
+# Fields: 
+- _capitalLetter : char
++ CapitalLetter : char
++ Index : int
++ Description : string
++ NumOfRequestInputKeys : uint
++ ControlMethod : SensorControlMethod
++ ControlAgent : SensorControlAgent
++ ArrowSign : SensorArrowSign
++ RequestBody : SensorRequestBodies
++ RequestPlacementMethod : SensorRequestPlacementMethod
++ UniqueCode : string
+
+# Methods: 
++ Sensor ()
++ isValid () : bool
++ override Equals (object) : bool
+____________________________________________________________
+
+			FILE Settings.cs
+____________________________________________________________
+
+class DefaultSettings 
+
+# Fields: 
+- lanMode : LanguageMode
++ readonly OperatorCoefs : Dictionary<OperatorLevel, (double, double)>
++ readonly RequestTime : Dictionary<(SensorRequestBodies, SensorRequestPlacementMethod), double>
++ readonly ControlAgentsTime : Dictionary<SensorControlAgent, double>
++ readonly IndformationRepresentationMethodCoefs : Dictionary<InformationRepresentationMethod, double>
+- readonly LabelsText : Dictionary<(LanguageMode, Labels), string>
+- readonly ButtonsText : Dictionary<(LanguageMode, Buttons), string>
+- readonly ToolTipsText : Dictionary<(LanguageMode, ToolTips), string>
+- readonly ErrorMessagesText : Dictionary<(LanguageMode, ErrorMessages), string>
+- readonly MessageBoxText : Dictionary<(LanguageMode, MessageBoxMessages), string>
+- readonly ContextMenuHeadersText : Dictionary<(LanguageMode, ContextMenuHeaders), string>
+- readonly WindowsTitlesText : Dictionary<(LanguageMode, WindowTitles), string>
+- readonly ControlMethodsText : Dictionary<(LanguageMode, SensorControlMethod), string>
+- readonly ControlAgentsText : Dictionary<(LanguageMode, SensorControlAgent), string>
+- readonly InformationRepresentationMethodsText : Dictionary<(LanguageMode, InformationRepresentationMethod), string>
+- readonly RequestBodiesText : Dictionary<(LanguageMode, SensorRequestBodies), string>
+- readonly RequestPlacementMethodText : Dictionary<(LanguageMode, SensorRequestPlacementMethod), string>
+- readonly WordsValues : Dictionary<(LanguageMode, Words), string>
++ LanguageMode : LanguageMode
+
+# Methods: 
++ static DefaultSettings ()
++ getErrorMessageText (ErrorMessages) : string
++ getMessageBoxText (MessageBoxMessages) : string
++ getContextMenuHeaderText (ContextMenuHeaders) : string
++ getWindowTitleText (WindowTitles) : string
++ getControlMethodText (SensorControlMethod) : string
++ getControlAgentText (SensorControlAgent) : string
++ getInformationRepresentationMethodText (InformationRepresentationMethod) : string
++ getRequestBodyText (SensorRequestBodies) : string
++ getRequestPlacementMethodText (SensorRequestPlacementMethod) : string
++ getButtonText (Buttons) : string
++ getLabelText (Labels) : string
++ getToolTipText (ToolTips) : string
++ getWordValue (Words) : string
+____________________________________________________________
+
+			FILE ShowTime.xaml.cs
+____________________________________________________________
+
+class ShowTime : Window 
+
+# Methods: 
++ ShowTime (Event)
+- time (double) : string
+- LocalizeWindow () : void
+____________________________________________________________
+
+			FILE VertexDialog.xaml.cs
+____________________________________________________________
+
+class VertexDialog : Window 
+
+# Fields: 
+- const defWindowHeight : uint
+- const addViolationWindowHeight : uint
+- const addAuxiliaryParamWindowHeight : uint
+- const addRepetativeViolationWindowHeight : uint
++ AuxiliaryParam : string
++ ConnectedVertexID : uint
++ FailureRateViolation : float
++ CapLetViolation : char
++ IndexViolation : uint
++ DescriptionViolation : string
++ ArrowViolation : SensorArrowSign
++ ControlAgentViolation : SensorControlAgent
++ ControlMethodViolation : SensorControlMethod
++ RequestBody : SensorRequestBodies
++ RequestPlacementMethod : SensorRequestPlacementMethod
++ ViolationUniqueCode : string
++ Result : VertexDialogResult
+- chooseActionRBs : List<RadioButton>
+- actionRB : ChooseAction
+- checkedArrowRB : SensorArrowSign
+- uniqueCodeRadioButtons : List<RadioButton>
+- violationBorder : Border
+- addViolationSize : uint
+- potentialVertexes : List<VertexNode>
+- allSensors : List<string>
+- mode : GVSSMode
+
+# Methods: 
++ VertexDialog (List<string>, List<VertexNode>, List<string>, List<string>, GVSSMode)
+- chooseRB_Click (object, RoutedEventArgs) : void
+- arrowRB_Click (object, RoutedEventArgs) : void
+- setViolationButton () : void
+- addViolationButton_Click (object, RoutedEventArgs) : void
+- loadPotentialVertexes (string) : void
+- auxiliaryParamCB_SelectionChanged (object, SelectionChangedEventArgs) : void
+- addAuxiliaryParamToVertex_Click (object, RoutedEventArgs) : void
+- addRepetativeViolationButton_Click (object, RoutedEventArgs) : void
+- setAddRepetativeViolationButton () : void
+- failureRateTB_TextChanged (object, TextChangedEventArgs) : void
+- uniqueViolationFailureTB_PreviewTextInput (object, TextCompositionEventArgs) : void
+- textBoxWithoutSpaceKey_PreviewKeyDown (object, KeyEventArgs) : void
+- addViolationDescription_TextChanged (object, TextChangedEventArgs) : void
+- nameParam_TextChanged (object, TextChangedEventArgs) : void
+- capLetTxtBox_PreviewTextInput (object, TextCompositionEventArgs) : void
+- indexTxtBox_PreviewTextInput (object, TextCompositionEventArgs) : void
+- failureRateTB_PreviewTextInput (object, TextCompositionEventArgs) : void
+- controlMethodCB_SelectionChanged (object, SelectionChangedEventArgs) : void
+- requestBodyCB_SelectionChanged (object, SelectionChangedEventArgs) : void
+- LocalizeWindow () : void
+
+# Nested types: 
++ enum VertexDialogResult
+- enum ChooseAction
+
+____________________________________________________________
+
+enum VertexDialogResult 
+
+# Values: 
+JustClosed
+AddViolation
+AddAuxiliaryParam
+____________________________________________________________
+
+enum ChooseAction 
+
+# Values: 
+Violation
+AuxiliaryParam
+None
+____________________________________________________________
+

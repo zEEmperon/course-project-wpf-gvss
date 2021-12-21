@@ -1,0 +1,74 @@
+﻿<Application x:Class="gvss_project.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:gvss_project"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <SolidColorBrush x:Key="defBlue" Color="#FF0E4197"/>
+        <SolidColorBrush x:Key="blueBorderBrush" Color="#FF4B80D8"/>
+        <SolidColorBrush x:Key="mainButtonBlue" Color="#FF06265D"/>
+        <SolidColorBrush x:Key="mainButtonBlueLighter" Color="#FF26519C"/>
+        <SolidColorBrush x:Key="disabledBlue" Color="#8b9bc7"/>
+        <SolidColorBrush x:Key="lightBackgroundColor" Color="#FFB8D3FF"/>
+        <SolidColorBrush x:Key="greenMain" Color="#057511"/>
+        <SolidColorBrush x:Key="greenBackground" Color="#c8facd"/>
+        <SolidColorBrush x:Key="backgroundColor" Color="#5382cf"/>
+        <SolidColorBrush x:Key="dialogBackground" Color="#FFB8D3FF"/>
+
+
+        <Style TargetType="Button" x:Key="defButton">
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Margin" Value="3, 3, 3, 3"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="IsTabStop" Value="False"/>
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Border Name="backgroundElement"  BorderThickness="0" CornerRadius="10" Background="{TemplateBinding Background}"/>
+                            <ContentPresenter HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"
+                                          TextElement.FontWeight="{TemplateBinding FontWeight}"
+                                          TextElement.Foreground="{TemplateBinding Foreground}"
+                                          TextElement.FontSize="{TemplateBinding FontSize}"
+                                          TextElement.FontFamily="{TemplateBinding FontFamily}">
+                            </ContentPresenter>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" TargetName="backgroundElement" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=BorderBrush}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Background" TargetName="backgroundElement" Value="{StaticResource disabledBlue}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <Style x:Key="Arrow" TargetType="{x:Type RadioButton}">
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RadioButton}">
+                        <Image x:Name="imageCheckBox" Source="uncheckedRB.png" Stretch="Fill" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" />
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="imageCheckBox" Property="Source" Value="checkedRB.png" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="imageCheckBox" Property="Source" Value="disabledRB.png" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+    </Application.Resources>
+</Application>

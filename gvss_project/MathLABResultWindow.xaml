@@ -1,0 +1,31 @@
+﻿<Window x:Class="gvss_project.MathLABResultWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:gvss_project"
+        mc:Ignorable="d"
+        Title="MathLab результаты" Height="450" Width="420" ResizeMode="NoResize" Background="{StaticResource backgroundColor}">
+
+
+    <DataGrid x:Name="resultDataGrid" Margin="10" AutoGenerateColumns="False" IsReadOnly="True" FontSize="18" HorizontalAlignment="Center">
+        <DataGrid.Columns>
+            <DataGridTextColumn Header="№ события" Binding="{Binding EventID}">
+                <DataGridTextColumn.ElementStyle>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="HorizontalAlignment" Value="Center" />
+                    </Style>
+                </DataGridTextColumn.ElementStyle>
+            </DataGridTextColumn>
+            <DataGridTextColumn Header="Время обнаружения события" Binding="{Binding EventTime}">
+                <DataGridTextColumn.ElementStyle>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="HorizontalAlignment" Value="Center" />
+                    </Style>
+                </DataGridTextColumn.ElementStyle>
+            </DataGridTextColumn>
+        </DataGrid.Columns>
+
+    </DataGrid>
+
+</Window>

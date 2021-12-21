@@ -1,0 +1,276 @@
+﻿<Window x:Class="gvss_project.VertexDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:gvss_project"
+        mc:Ignorable="d"
+        Title="Добавить" Height="650" Width="330" Background="{StaticResource dialogBackground}" ResizeMode="NoResize">
+
+    <Window.Resources>
+        <Style x:Key="chooseRB" TargetType="RadioButton">
+            <Setter Property="GroupName" Value="Choose"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+            <Setter Property="Margin" Value="10,5"/>
+            <Setter Property="Margin" Value="10,5"/>
+            <Setter Property="FontSize" Value="12"/>
+            <EventSetter Event="Click" Handler="chooseRB_Click"/>
+        </Style>
+
+    </Window.Resources>
+    <StackPanel>
+        <Border >
+            <StackPanel x:Name="mainStackPanel">
+                <Border Margin="2,2,2,0" Background="{StaticResource mainButtonBlue}" >
+                    <Label x:Name="chooseActionLabel" Content="Выберите действие" FontWeight="DemiBold" Foreground="White" HorizontalAlignment="Center" FontSize="14"/>
+                </Border>
+                <Border Margin="20,10" CornerRadius="15" Background="{StaticResource mainButtonBlueLighter}" >
+                    <RadioButton x:Name="violationRB" Style="{StaticResource chooseRB}">Добавить НАРУШЕНИЕ</RadioButton>
+                </Border>
+                <Border Margin="20,0,20,10" CornerRadius="15" Background="{StaticResource mainButtonBlueLighter}" >
+                    <RadioButton x:Name="auxiliaryParamRB" Style="{StaticResource chooseRB}">Добавить ПРИЗНАК к ВЕРШИНЕ</RadioButton>
+                </Border>
+
+                <Border Visibility="Collapsed" x:Name="addRepetativeViolationBorder" Margin="2,2,2,0" Background="#FFB8D3FF">
+                    <StackPanel>
+                        <Border Margin="2" Background="{StaticResource mainButtonBlue}">
+                            <Label x:Name="addViolationLabel" Content="Добавить нарушение" FontWeight="DemiBold" Foreground="White" HorizontalAlignment="Center" FontSize="14"/>
+                        </Border>
+                        <Grid Margin="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.7*"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0" Margin="0,0,5,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Border Grid.Row="0" Background="{StaticResource defBlue}">
+                                    <TextBlock x:Name="violationLabel" FontWeight="DemiBold" Foreground="White" VerticalAlignment="Bottom" HorizontalAlignment="Center">Нарушение</TextBlock>
+                                </Border>
+                                <ComboBox Grid.Row="1" x:Name="repetativeViolationsCB" HorizontalContentAlignment="Center"  FontSize="14" />
+                            </Grid>
+
+                            <Grid Grid.Column="1" Margin="5,0,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Border Grid.Row="0" Background="{StaticResource defBlue}">
+                                    <TextBlock x:Name="failureRateLabel" FontWeight="DemiBold" Foreground="White" VerticalAlignment="Bottom" HorizontalAlignment="Center">Частота выхода из строя</TextBlock>
+                                </Border>
+                                <TextBox x:Name="failureRateTB" MaxLength="5" TextChanged="failureRateTB_TextChanged" PreviewTextInput="failureRateTB_PreviewTextInput" PreviewKeyDown="textBoxWithoutSpaceKey_PreviewKeyDown" FontSize="16" Grid.Row="1"/>
+                            </Grid>
+                        </Grid>
+
+                        <Button x:Name="addRepetativeViolationButton" Click="addRepetativeViolationButton_Click" IsDefault="True" Style="{DynamicResource defButton}" Background="{StaticResource defBlue}" BorderBrush="#FF3F6BB6" Margin="20,0,20,10" Height="24" Content="Добавить"></Button>
+                    </StackPanel>
+                </Border>
+                <Border Visibility="Collapsed" x:Name="addViolationBorder" Margin="2,2,2,0" Background="#FFB8D3FF">
+                    <StackPanel>
+                        <Border Margin="2" Background="{StaticResource mainButtonBlue}">
+                            <Label x:Name="addUniqueViolationLabel" Content="Добавить нарушение" FontWeight="DemiBold" Foreground="White" HorizontalAlignment="Center" FontSize="14"/>
+                        </Border>
+                        <StackPanel Margin="10,10,10,40">
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1.8*"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <Grid Grid.Column="0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+
+                                    </Grid.RowDefinitions>
+
+                                    <Border  Height="5"  Grid.Row="0"/>
+
+                                    <Grid  Grid.Row="1">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="1.2*"/>
+                                            <ColumnDefinition  Width="1*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Border Grid.Column="0" Background="{StaticResource defBlue}">
+                                            <TextBlock x:Name="letterLabel" FontWeight="DemiBold"  Foreground="White" HorizontalAlignment="Center">Буква</TextBlock>
+                                        </Border>
+                                        <TextBox x:Name="capLetTxtBox" MaxLength="1" Grid.Column="1" VerticalAlignment="Center" TextChanged="nameParam_TextChanged" PreviewKeyDown="textBoxWithoutSpaceKey_PreviewKeyDown" PreviewTextInput="capLetTxtBox_PreviewTextInput"/>
+
+                                    </Grid>
+                                    
+                                    <Border  Height="20"  Grid.Row="2"/>
+                                    
+                                    <Grid Grid.Row="3">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="1.2*"/>
+                                            <ColumnDefinition  Width="1*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Border Grid.Column="0" Background="{StaticResource defBlue}">
+                                            <TextBlock x:Name="indexLabel" FontWeight="DemiBold" Foreground="White" HorizontalAlignment="Center">Индекс</TextBlock>
+                                        </Border>
+                                        <TextBox x:Name="indexTxtBox" MaxLength="3" TextChanged="nameParam_TextChanged" PreviewTextInput="indexTxtBox_PreviewTextInput" PreviewKeyDown="textBoxWithoutSpaceKey_PreviewKeyDown" Grid.Column="1"/>
+
+                                    </Grid>
+                                    
+                                    <Border  Height="5"  Grid.Row="4"/>
+
+                                </Grid>
+                                
+                                <Border x:Name="borderAroundUniqueCodePreview" Grid.Column="1" Margin="5,0,0,0" CornerRadius="15">
+                                    <DockPanel  x:Name="uniqueCodePreviewDock" LastChildFill="True" Width="56" Height="58">
+
+                                        <RadioButton x:Name="arrowUpRB" Click="arrowRB_Click" GroupName="ArrowGroup" IsEnabled="False" Style="{DynamicResource Arrow}" DockPanel.Dock="Top" Width="15" Height="15" Content="Верхняя кнопка" />
+                                        <RadioButton x:Name="arrowDownRB" Click="arrowRB_Click" GroupName="ArrowGroup" IsEnabled="False" Style="{DynamicResource Arrow}" DockPanel.Dock="Bottom" Width="15" Height="15" Content="Нижняя кнопка" RenderTransformOrigin="0.5, 0.5" >
+                                            <RadioButton.RenderTransform>
+                                                <RotateTransform Angle="180"/>
+                                            </RadioButton.RenderTransform>
+                                        </RadioButton>
+                                        <RadioButton x:Name="arrowLeftRB" Click="arrowRB_Click" GroupName="ArrowGroup" IsEnabled="False" Style="{DynamicResource Arrow}" DockPanel.Dock="Left" Height="15" Width="15" Content="Левая кнопка" RenderTransformOrigin="0.5, 0.5">
+                                            <RadioButton.RenderTransform>
+                                                <RotateTransform Angle="270"/>
+                                            </RadioButton.RenderTransform>
+                                        </RadioButton>
+                                        <RadioButton x:Name="arrowRightRB" Click="arrowRB_Click" GroupName="ArrowGroup" IsEnabled="False" Style="{DynamicResource Arrow}" DockPanel.Dock="Right"  Width="15" Height="15"  Content="Правая кнопка" RenderTransformOrigin="0.5, 0.5">
+                                            <RadioButton.RenderTransform>
+                                                <RotateTransform Angle="90"/>
+                                            </RadioButton.RenderTransform>
+                                        </RadioButton>
+
+                                        <Label x:Name="namePreviewLabel" FontSize="17" HorizontalAlignment="Center" VerticalAlignment="Center" Content="" FontWeight="Bold" Width="35" Height="25" Padding="8,0,0,0" Foreground="White"/>
+
+                                    </DockPanel>
+                                </Border>
+                            </Grid>
+
+                            <Grid Margin="0,15,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Border Grid.Row="0" Background="{StaticResource defBlue}">
+                                    <TextBlock x:Name="controlMethodLabel" FontWeight="DemiBold" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">Способ контроля</TextBlock>
+                                </Border>
+                                <ComboBox x:Name="controlMethodCB" SelectionChanged="controlMethodCB_SelectionChanged" FontSize="11" Grid.Row="1"/>
+                            </Grid>
+                            <Grid Margin="0,5,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Border Grid.Row="0" Background="{StaticResource defBlue}">
+                                    <TextBlock x:Name="controlAgentTBlock" FontWeight="DemiBold" Foreground="White" VerticalAlignment="Bottom" HorizontalAlignment="Center"></TextBlock>
+                                </Border>
+                                <ComboBox x:Name="controlAgentCB" FontSize="11" Grid.Row="1"/>
+                            </Grid>
+                            <Grid Margin="0,5,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Border x:Name="requestBodyBorder" Grid.Row="0" Background="{StaticResource defBlue}">
+                                    <TextBlock x:Name="requestBodyLabel" FontWeight="DemiBold" Foreground="White" VerticalAlignment="Bottom" HorizontalAlignment="Center">Орган запроса</TextBlock>
+                                </Border>
+                                <ComboBox x:Name="requestBodyCB" SelectionChanged="requestBodyCB_SelectionChanged" FontSize="11" Grid.Row="1"/>
+                            </Grid>
+                            
+                            <Grid Margin="0,5,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Border x:Name="requestPlacementMethodBorder" Grid.Row="0" Background="{StaticResource defBlue}">
+                                    <TextBlock x:Name="requestPlacementMethodLabel" FontWeight="DemiBold" Foreground="White" VerticalAlignment="Bottom" HorizontalAlignment="Center">Размещение органа запроса</TextBlock>
+                                </Border>
+                                <ComboBox x:Name="requestPlacementMethodCB" FontSize="11" Grid.Row="1"/>
+                            </Grid>
+
+                            <Grid Margin="0,5,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Border Grid.Row="0" Background="{StaticResource defBlue}">
+                                    <TextBlock x:Name="failureRateUniqueLabel" FontWeight="DemiBold" Foreground="White" VerticalAlignment="Bottom" HorizontalAlignment="Center">Частота выхода из строя</TextBlock>
+                                </Border>
+                                <TextBox x:Name="uniqueViolationFailureTB" MaxLength="5" TextChanged="failureRateTB_TextChanged" PreviewTextInput="uniqueViolationFailureTB_PreviewTextInput" PreviewKeyDown="textBoxWithoutSpaceKey_PreviewKeyDown" FontSize="12" Grid.Row="1"/>
+                            </Grid>
+
+                            <Grid Margin="0,5,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="9*"/>
+                                    <ColumnDefinition Width="91*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="2*"/>
+                                </Grid.RowDefinitions>
+                                
+                                <Border Grid.Row="0" Background="{StaticResource defBlue}" Grid.ColumnSpan="2">
+                                    <TextBlock x:Name="descriptionLabel" FontWeight="DemiBold" Foreground="White" Padding="0,0,0,2" VerticalAlignment="Center" HorizontalAlignment="Center">Краткое описание</TextBlock>
+                                </Border>
+                                
+                                <TextBox x:Name="addViolationDescription" TextChanged="addViolationDescription_TextChanged" TextWrapping="Wrap" MaxLength="100" Height="50" FontSize="12" Grid.Row="1" Grid.ColumnSpan="2"/>
+                            </Grid>
+                            
+                            <TextBlock x:Name="addViolationInfo" Margin="0,3,0,0"/>
+                            <Button x:Name="addViolationButton" IsDefault="True" Click="addViolationButton_Click"  IsEnabled="False" Style="{DynamicResource defButton}" Background="{StaticResource defBlue}" BorderBrush="#FF3F6BB6" Margin="0,3,0,0" Height="24" Content="Добавить"></Button>
+                        
+                        </StackPanel>
+                    </StackPanel>
+
+                </Border>
+                <Border Visibility="Collapsed" x:Name="addAuxiliaryParamBorder" Margin="2,2,2,0" Background="#FFB8D3FF">
+                    <StackPanel>
+
+                        <Border Margin="2" Background="{StaticResource mainButtonBlue}">
+                            <Label x:Name="addAuxiliaryParamToVertexLabel" Content="Добавить признак к вершине" FontWeight="DemiBold" Foreground="White" HorizontalAlignment="Center" FontSize="14"/>
+                        </Border>
+
+                        <Grid Margin="20,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.4*"/>
+                                <ColumnDefinition Width="0.1*"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid Grid.Column="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Border Grid.Row="0" Background="{StaticResource defBlue}">
+                                    <TextBlock x:Name="auxiliaryParamLabel" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">Признак</TextBlock>
+                                </Border>
+                                <ComboBox x:Name="auxiliaryParamCB" SelectionChanged="auxiliaryParamCB_SelectionChanged" HorizontalContentAlignment="Center" FontSize="15" Grid.Row="1"/>
+                            </Grid>
+
+                            <Grid Grid.Column="2">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Border Grid.Row="0" Background="{StaticResource defBlue}">
+                                    <TextBlock x:Name="vertexLabel" FontWeight="DemiBold" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">Вершина</TextBlock>
+                                </Border>
+                                <ComboBox x:Name="potentialVertexesCB" FontSize="15" Grid.Row="1"/>
+                            </Grid>
+
+                        </Grid>
+
+                        <Button IsDefault="True" x:Name="addAuxiliaryParamToVertex" IsEnabled="False" Click="addAuxiliaryParamToVertex_Click" Style="{DynamicResource defButton}" Background="{StaticResource defBlue}" BorderBrush="#FF3F6BB6" Margin="20,0" Height="24" Content="Добавить"></Button>
+                    </StackPanel>
+
+                </Border>
+
+            </StackPanel>
+        </Border>
+    </StackPanel>
+</Window>

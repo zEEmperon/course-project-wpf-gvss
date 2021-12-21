@@ -1,0 +1,73 @@
+﻿<Window x:Class="gvss_project.EditDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:gvss_project"
+        mc:Ignorable="d"
+        Title="Редактировать" Height="435" Width="270" ResizeMode="NoResize">
+    <Border Background="{StaticResource lightBackgroundColor}">
+        <StackPanel Margin="10,10,10,0">
+            <Border CornerRadius="15" Width="160" Background="{StaticResource defBlue}">
+                <Label x:Name="uniqueCodeLabel" Content="H11" HorizontalAlignment="Center" FontSize="50" FontWeight="Bold" Foreground="White"/>
+            </Border>
+
+            <Grid Margin="0,15,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Border Grid.Row="0" Background="{StaticResource defBlue}">
+                    <TextBlock x:Name="controlMethodLabel" FontWeight="DemiBold" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">Способ контроля</TextBlock>
+                </Border>
+                <ComboBox x:Name="controlMethodCB" SelectionChanged="controlMethodCB_SelectionChanged" FontSize="11" Grid.Row="1"/>
+            </Grid>
+            <Grid Margin="0,5,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Border Grid.Row="0" Background="{StaticResource defBlue}">
+                    <TextBlock x:Name="controlAgentTBlock" FontWeight="DemiBold" Foreground="White" VerticalAlignment="Bottom" HorizontalAlignment="Center"></TextBlock>
+                </Border>
+                <ComboBox x:Name="controlAgentCB" SelectionChanged="cb_SelectionChanged" FontSize="11" Grid.Row="1"/>
+            </Grid>
+            <Grid Margin="0,5,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="135*"/>
+                    <ColumnDefinition Width="109*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Border x:Name="requestBodyBorder" Grid.Row="0" Background="{StaticResource defBlue}" Grid.ColumnSpan="2">
+                    <TextBlock x:Name="requestBodyLabel" FontWeight="DemiBold" Foreground="White" VerticalAlignment="Bottom" HorizontalAlignment="Center">Орган запроса</TextBlock>
+                </Border>
+                <ComboBox x:Name="requestBodyCB" SelectionChanged="requestBodyCB_SelectionChanged" FontSize="11" Grid.Row="1" Grid.ColumnSpan="2"/>
+            </Grid>
+            <Grid Margin="0,5,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Border x:Name="requestPlacementMethodBorder" Grid.Row="0" Background="{StaticResource defBlue}">
+                    <TextBlock x:Name="requestPlacementMethodLabel" FontWeight="DemiBold" Foreground="White" VerticalAlignment="Bottom" HorizontalAlignment="Center">Размещение органа запроса</TextBlock>
+                </Border>
+                <ComboBox x:Name="requestPlacementMethodCB" SelectionChanged="cb_SelectionChanged" FontSize="11" Grid.Row="1"/>
+            </Grid>
+
+            <Grid Margin="0,5,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="2*"/>
+                </Grid.RowDefinitions>
+                <Border Grid.Row="0" Background="{StaticResource defBlue}">
+                    <TextBlock x:Name="descriptionLabel" FontWeight="Bold" Foreground="White" Padding="0,0,0,2" VerticalAlignment="Center" HorizontalAlignment="Center">Краткое описание</TextBlock>
+                </Border>
+                <TextBox x:Name="descriptionTB" TextChanged="descriptionTB_TextChanged" TextWrapping="Wrap" MaxLength="80" Height="50" FontSize="11" Grid.Row="1"/>
+            </Grid>
+            <Button x:Name="changeButton" Click="Button_Click" IsEnabled="False" Style="{DynamicResource defButton}" Background="{StaticResource defBlue}" BorderBrush="#FF3F6BB6" Margin="0,15,0,0" Width="160" Height="30" Content="Изменить"></Button>
+        </StackPanel>
+    </Border>
+</Window>
